@@ -48,16 +48,13 @@ export const TransactionsProvider = ({ children }) => {
 
         const availableTransactions =
           await transactionsContract.getAllTransactions(
-            "0x49403ae592C82fc3f861cD0b9738f7524Fb1F38C"
+            currentAccount
           );
         console.log(availableTransactions);
         const structuredTransactions = availableTransactions.map(
           (transaction) => ({
             fName: transaction.fName,
             addressTo: transaction.receiver,
-            // timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
-
-            // keyword: transaction.keyword,
             amount: parseInt(transaction.amount._hex) / 10 ** 18,
             message: transaction.message,
           })
@@ -82,7 +79,7 @@ export const TransactionsProvider = ({ children }) => {
 
         const availableMembers =
           await transactionsContract.getAllMembers(
-            "0x49403ae592C82fc3f861cD0b9738f7524Fb1F38C"
+            currentAccount
           );
         console.log(availableMembers);
         const structuredMembers = availableMembers.map(
